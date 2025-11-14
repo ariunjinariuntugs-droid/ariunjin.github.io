@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Clone</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="navbar">
+        <div class="logo">Spotify</div>
+
+        <nav class="nav-links">
+            <a href="#">Premium</a>
+            <a href="#">Support</a>
+            <a href="#">Download</a>
+        </nav>
+
+        <div class="auth">
+            <a href="#">Sign Up</a>
+            <a href="#">Log in</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Listening is everything</h1>
+            <p>Millions of songs and podcasts. No credit card needed.</p>
+            <button>Get Spotify Free</button>
+        </div>
+
+        <div class="hero-img">
+            <img src="hero.png" alt="Spotify hero image">
+        </div>
+    </section>
+
+</body>
+</html>
