@@ -19,6 +19,8 @@ body {
 
 .sidebar .logo img {
   width: 130px;
+  max-width: 100%;
+  height: auto;
 }
 
 .sidebar .navigation ul {
@@ -175,6 +177,8 @@ body {
   width: 100%;
   border-radius: 6px;
   margin-bottom: 10px;
+  max-width: 100%;
+  height: auto;
 }
 .spotify-playlists .list .item .play {
   position: relative;
@@ -212,4 +216,41 @@ body {
 .spotify-playlists hr {
   margin: 70px 0px 0px;
   border-color: #636363;
+}
+@media (max-width: 600px) {
+
+  body {
+    font-size: 14px;
+  }
+
+  .sidebar {
+    width: 60px;
+  }
+
+  .sidebar .navigation ul li span:last-child {
+    display: none; /* hide text, icon only */
+  }
+
+  .main-container {
+    margin-left: 60px;
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+@media (max-width: 900px) {
+
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+}
+@media (min-width: 1200px) {
+
+  .cards {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
 }
