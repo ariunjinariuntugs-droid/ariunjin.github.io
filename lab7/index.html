@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>5 JavaScript Tasks</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; line-height: 1.6; }
+    .task { margin-bottom: 25px; padding: 15px; border: 1px solid #ccc; border-radius: 10px; }
+    input { padding: 5px; margin-top: 5px; }
+    button { padding: 6px 12px; margin-top: 10px; cursor: pointer; }
+    .output { margin-top: 10px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>LAB7 DAALGAVARUUD</h1>
+
+  <div class="task">
+    <h3>1. Check if sum of digits is a palindrome</h3>
+    <input id="t1" type="number" placeholder="Enter number" />
+    <button onclick="task1()">Check</button>
+    <div id="out1" class="output"></div>
+  </div>
+
+
+  <div class="task">
+    <h3>2. Wolf catches rabbit time</h3>
+    <input id="t2" type="number" placeholder="Distance (km)" />
+    <button onclick="task2()">Calculate</button>
+    <div id="out2" class="output"></div>
+  </div>
+
+
+  <div class="task">
+    <h3>3. Apartment location</h3>
+    <input id="t3" type="number" placeholder="Apartment number" />
+    <button onclick="task3()">Locate</button>
+    <div id="out3" class="output"></div>
+  </div>
+
+
+  <div class="task">
+    <h3>4. LCM of 5 numbers</h3>
+    <input id="t4" placeholder="e.g. 2,3,4,5,6" />
+    <button onclick="task4()">Find LCM</button>
+    <div id="out4" class="output"></div>
+  </div>
+
+
+  <div class="task">
+    <h3>5. Morning square / Evening root</h3>
+    <input id="t5" type="number" placeholder="Enter number" />
+    <button onclick="task5()">Calculate</button>
+    <div id="out5" class="output"></div>
+  </div>
+
+
+  <script>
+    function task1() {
+      let n = document.getElementById("t1").value;
+      let sum = 0;
+      for (let d of String(n)) sum += Number(d);
+      let isPal = String(sum) === String(sum).split("").reverse().join("");
+      document.getElementById("out1").textContent = `Sum = ${sum}, Palindrome = ${isPal}`;
+    }
+
+  
+    function task2() {
+      let d = Number(document.getElementById("t2").value);
+      const vW = 25, vR = 18;
+      let rel = vW - vR;
+      if (rel <= 0) {
+        document.getElementById("out2").textContent = "Wolf cannot catch";
+        return;
+      }
+      let hours = d / rel;
+      let totalSec = Math.round(hours * 3600);
+      let min = Math.floor(totalSec / 60);
+      let sec = totalSec % 60;
+      document.getElementById("out2").textContent = `${min} minutes ${sec} seconds`;
+    }
+
+    function task3() {
+      let n = Number(document.getElementById("t3").value);
+      const floors = 9, perFloor = 4, entrances = 3;
+      const perEntrance = floors * perFloor;
+      if (n < 1 || n > perEntrance * entrances) {
+        document.getElementById("out3").textContent = "Invalid apartment number";
+        return;
+      }
+      let entrance = Math.floor((n - 1) / perEntrance) + 1;
+      let idx = (n - 1) % perEntrance;
+      let floor = Math.floor(idx / perFloor) + 1;
+      let door = (idx % perFloor) + 1;
+      document.getElementById("out3").textContent = `Entrance: ${entrance}, Floor: ${floor}, Door: ${door}`;
+    }
+
+    function gcd(a, b) { return b === 0 ? a : gcd(b, a % b); }
+    function lcm(a, b) { return Math.abs(a * b) / gcd(a, b); }
+
+    function task4() {
+      let nums = document.getElementById("t4").value.split(",").map(Number);
+      let res = nums.reduce((x, y) => lcm(x, y));
+      document.getElementById("out4").textContent = `LCM = ${res}`;
+    }
+
+    function task5() {
+      let n = Number(document.getElementById("t5").value);
+      let hour = new Date().getHours();
+      let out;
+      if (hour >= 6 && hour < 18) out = `${n}² = ${n * n}`;
+      else out = `√${n} = ${Math.sqrt(n)}`;
+      document.getElementById("out5").textContent = out;
+    }
+  </script>
+</body>
+</html>
