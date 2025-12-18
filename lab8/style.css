@@ -1,0 +1,55 @@
+body{
+    font-family: papyrus, sans-sherif;
+    background: url(hangman.jpg);
+    background-size: cover;
+    padding: 20px;
+}
+.game{
+    max-width: 700px;
+    margin:auto;
+    background:#fff; 
+    padding:20px; 
+    border-radius:12px 
+}
+h1{
+    margin-top:0
+}
+.question{
+    font-size:18px; 
+    margin-bottom:10px
+}
+.answer{
+    font-size:28px; 
+    letter-spacing:6px; 
+    margin:20px 0
+}
+.letters{
+    display:grid; 
+    grid-template-columns: r
+    epeat(7, 1fr); 
+    gap:8px
+}
+.letters button{
+    padding:10px; 
+    font-size:16px; 
+    cursor:pointer
+}
+.letters button:disabled{
+    background:#ddd; 
+    cursor:not-allowed
+}
+.hangman{
+    font-family: 
+    monospace; 
+    white-space: pre; 
+    margin-top:20px
+}
+.status{
+    margin-top:15px; 
+    font-weight:bold
+}
+.start-btn{
+    padding:10px 16px; 
+    font-size:16px; 
+    margin-bottom:15px
+}

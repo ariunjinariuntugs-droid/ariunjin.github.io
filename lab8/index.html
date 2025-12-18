@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hangman Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game">
+    <h1>Hangman</h1>
+    <button class="start-btn" onclick="startGame()">Start Game</button>
+
+    <div class="question" id="question"></div>
+    <div class="answer" id="answer"></div>
+
+    <div class="letters" id="letters"></div>
+
+    <div class="hangman" id="hangman"></div>
+    <div class="status" id="status"></div>
+  </div>
+
+  <script>
+    const questions = [
+  'Biggest Mammal?',
+  'Fastest vehicle?',
+  'Largest planet?',
+  'Hottest planet?',
+  'Fastest land animal?',
+  'Tallest animal?',
+  'Largest ocean?',
+  'Hardest natural substance?',
+  'Planet known as the Red Planet?',
+  'Largest bird?'
+];
+
+const answers = [
+  'Whale',
+  'Jet',
+  'Jupiter',
+  'Venus',
+  'Cheetah',
+  'Giraffe',
+  'Pacific',
+  'Diamond',
+  'Mars',
+  'Ostrich'
+];
+
+    let selectedAnswer = '';
+    let displayed = [];
+    let mistakes = 0;
+    const maxMistakes = 6;
+
+    const hangmanStages = [
+`\n\n\n\n\n_____`,
+` |\n |\n |\n |\n_|____`,
+` ____\n |  |\n |\n |\n_|____`,
+` ____\n |  |\n |  O\n |\n_|____`,
+` ____\n |  |\n |  O\n |  |\n_|____`,
+` ____\n |  |\n |  O\n | /|\\\n_|____`,
+` ____\n |  |\n |  O\n | /|\\\n_|_/ \\__`
+    ];
+
+    function startGame() {
+      const index = Math.floor(Math.random() * questions.length);
+      selectedAnswer = answers[index].toUpperCase();
+
+      document.getElementById('question').textContent = questions[index];
+
+      displayed = Array(selectedAnswer.length).fill('_');
+      mistakes = 0;
+
+      updateAnswer();
+      updateHangman();
+      document.getElementById('status').textContent = '';
+
+      createLetterButtons();
+    }
+
+    function createLetterButtons() {
+      const lettersDiv = document.getElementById('letters');
+      lettersDiv.innerHTML = '';
+
+      for (let i = 65; i <= 90; i++) {
+        const btn = document.createElement('button');
+        const letter = String.fromCharCode(i);
+        btn.textContent = letter;
+        btn.onclick = () => guessLetter(letter, btn);
+        lettersDiv.appendChild(btn);
+      }
+    }
+
+    function guessLetter(letter, btn) {
+      btn.disabled = true;
+
+      if (selectedAnswer.includes(letter)) {
+        for (let i = 0; i < selectedAnswer.length; i++) {
+          if (selectedAnswer[i] === letter) {
+            displayed[i] = letter;
+          }
+        }
+      } else {
+        mistakes++;
+      }
+
+      updateAnswer();
+      updateHangman();
+      checkGameOver();
+    }
+
+    function updateAnswer() {
+      document.getElementById('answer').textContent = displayed.join(' ');
+    }
+
+    function updateHangman() {
+      document.getElementById('hangman').textContent = hangmanStages[mistakes];
+    }
+
+    function checkGameOver() {
+      const status = document.getElementById('status');
+
+      if (!displayed.includes('_')) {
+        status.textContent = '🎉 You Win!';
+        disableAllButtons();
+      } else if (mistakes >= maxMistakes) {
+        status.textContent = '💀 Game Over! Answer was: ' + selectedAnswer;
+        disableAllButtons();
+      }
+    }
+
+    function disableAllButtons() {
+      document.querySelectorAll('.letters button').forEach(b => b.disabled = true);
+    }
+  </script>
+</body>
+</html>
