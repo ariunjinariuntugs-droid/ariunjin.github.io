@@ -10,6 +10,7 @@
     <h1>Hangman</h1>
     <button class="start-btn" onclick="startGame()">Start Game</button>
 
+    <div class="round" id="round"></div>
     <div class="question" id="question"></div>
     <div class="answer" id="answer"></div>
 
@@ -21,59 +22,75 @@
 
   <script>
     const questions = [
-  'Biggest Mammal?',
-  'Fastest vehicle?',
-  'Largest planet?',
-  'Hottest planet?',
-  'Fastest land animal?',
-  'Tallest animal?',
-  'Largest ocean?',
-  'Hardest natural substance?',
-  'Planet known as the Red Planet?',
-  'Largest bird?'
-];
+      'Biggest Mammal?',
+      'Fastest vehicle?',
+      'Largest planet?',
+      'Hottest planet?',
+      'Fastest land animal?',
+      'Tallest animal?',
+      'Largest ocean?',
+      'Hardest natural substance?',
+      'Planet known as the Red Planet?',
+      'Largest bird?'
+    ];
 
-const answers = [
-  'Whale',
-  'Jet',
-  'Jupiter',
-  'Venus',
-  'Cheetah',
-  'Giraffe',
-  'Pacific',
-  'Diamond',
-  'Mars',
-  'Ostrich'
-];
+    const answers = [
+      'Whale',
+      'Jet',
+      'Jupiter',
+      'Venus',
+      'Cheetah',
+      'Giraffe',
+      'Pacific',
+      'Diamond',
+      'Mars',
+      'Ostrich'
+    ];
 
+    let currentRound = 0;
     let selectedAnswer = '';
     let displayed = [];
     let mistakes = 0;
     const maxMistakes = 6;
 
     const hangmanStages = [
-`\n\n\n\n\n_____`,
-` |\n |\n |\n |\n_|____`,
-` ____\n |  |\n |\n |\n_|____`,
-` ____\n |  |\n |  O\n |\n_|____`,
-` ____\n |  |\n |  O\n |  |\n_|____`,
-` ____\n |  |\n |  O\n | /|\\\n_|____`,
-` ____\n |  |\n |  O\n | /|\\\n_|_/ \\__`
+      `\n\n\n\n\n_____`,
+      ` |\n |\n |\n |\n_|____`,
+      ` ____\n |  |\n |\n |\n_|____`,
+      ` ____\n |  |\n |  O\n |\n_|____`,
+      ` ____\n |  |\n |  O\n |  |\n_|____`,
+      ` ____\n |  |\n |  O\n | /|\\\n_|____`,
+      ` ____\n |  |\n |  O\n | /|\\\n_|_/ \\__`
     ];
 
     function startGame() {
-      const index = Math.floor(Math.random() * questions.length);
-      selectedAnswer = answers[index].toUpperCase();
+      document.querySelector('.start-btn').style.display = 'none';
 
-      document.getElementById('question').textContent = questions[index];
+      currentRound = 0;
+      startRound();
+    }
 
+
+    function startRound() {
+      if (currentRound >= questions.length) {
+        document.getElementById('status').textContent = '🏆 Game Finished! You completed all rounds!';
+        document.getElementById('question').textContent = '';
+        document.getElementById('answer').textContent = '';
+        document.getElementById('letters').innerHTML = '';
+        document.getElementById('hangman').textContent = '';
+        document.getElementById('round').textContent = '';
+        return;
+      }
+
+      selectedAnswer = answers[currentRound].toUpperCase();
       displayed = Array(selectedAnswer.length).fill('_');
       mistakes = 0;
 
+      document.getElementById('round').textContent = `Round ${currentRound + 1} of ${questions.length}`;
+      document.getElementById('question').textContent = questions[currentRound];
+      document.getElementById('status').textContent = '';
       updateAnswer();
       updateHangman();
-      document.getElementById('status').textContent = '';
-
       createLetterButtons();
     }
 
@@ -120,11 +137,15 @@ const answers = [
       const status = document.getElementById('status');
 
       if (!displayed.includes('_')) {
-        status.textContent = '🎉 You Win!';
+        status.textContent = '🎉 Correct! Moving to next round...';
         disableAllButtons();
+        currentRound++;
+        setTimeout(startRound, 1500); // move to next round after 1.5 sec
       } else if (mistakes >= maxMistakes) {
-        status.textContent = '💀 Game Over! Answer was: ' + selectedAnswer;
+        status.textContent = `💀 Game Over! Answer was: ${selectedAnswer}. Next round...`;
         disableAllButtons();
+        currentRound++;
+        setTimeout(startRound, 2000); // move to next round after 2 sec
       }
     }
 
