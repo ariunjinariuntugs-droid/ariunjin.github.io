@@ -51,17 +51,20 @@
     let selectedAnswer = '';
     let displayed = [];
     let mistakes = 0;
-    const maxMistakes = 6;
+    const maxMistakes = hangmanStages.lenth - 1;
 
-    const hangmanStages = [
-      `\n\n\n\n\n_____`,
-      ` |\n |\n |\n |\n_|____`,
-      ` ____\n |  |\n |\n |\n_|____`,
-      ` ____\n |  |\n |  O\n |\n_|____`,
-      ` ____\n |  |\n |  O\n |  |\n_|____`,
-      ` ____\n |  |\n |  O\n | /|\\\n_|____`,
-      ` ____\n |  |\n |  O\n | /|\\\n_|_/ \\__`
-    ];
+const hangmanStages = [
+`\n\n\n\n\n_____`,
+` |\n |\n |\n |\n_|____`,
+` ____\n |  |\n |\n |\n_|____`,
+` ____\n |  |\n |  O\n |\n_|____`,
+` ____\n |  |\n |  O\n |  |\n_|____`,
+` ____\n |  |\n |  O\n |  |\n_|____`,
+` ____\n |  |\n |  O\n | /| \n_|____`,
+` ____\n |  |\n |  O\n | /|\\\n_|____`,
+` ____\n |  |\n |  O\n | /|\\\n_|_/`,
+` ____\n |  |\n |  O\n | /|\\\n_|_/ \\__`
+];
 
     function startGame() {
       document.querySelector('.start-btn').style.display = 'none';

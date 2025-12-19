@@ -47,9 +47,13 @@ h1{
     white-space: pre;
     margin: 20px auto;
     width: 220px;         
-    text-align: left;    
+    text-align: left; 
+    transition: transform 0.3s ease;
+    display: inline-block;   
 }
-
+.hangman:hover {
+    transform: scale(1.5);
+}
 .status{
     margin-top:15px; 
     font-weight:bold;
