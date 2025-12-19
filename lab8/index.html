@@ -22,21 +22,21 @@
 
   <script>
     const questions = [
-      'Biggest Mammal?',
-      'Fastest vehicle?',
+      'Mongoliin hamgiin hamgiin',
+      'Largest contigious land emprie',
       'Largest planet?',
       'Hottest planet?',
       'Fastest land animal?',
       'Tallest animal?',
       'Largest ocean?',
       'Hardest natural substance?',
-      'Planet known as the Red Planet?',
+      'Hamgiin zaluu billionaire',
       'Largest bird?'
     ];
 
     const answers = [
-      'Whale',
-      'Jet',
+      'Khurelsukh',
+      'Mongol',
       'Jupiter',
       'Venus',
       'Cheetah',
@@ -44,7 +44,7 @@
       'Pacific',
       'Diamond',
       'Mars',
-      'Ostrich'
+      'Ariunjin',
     ];
 
 const hangmanStages = [
@@ -142,12 +142,12 @@ const hangmanStages = [
         status.textContent = '🎉 Correct! Moving to next round...';
         disableAllButtons();
         currentRound++;
-        setTimeout(startRound, 1500); // move to next round after 1.5 sec
+        setTimeout(startRound, 1500);
       } else if (mistakes >= maxMistakes) {
         status.textContent = `💀 Game Over! Answer was: ${selectedAnswer}. Next round...`;
         disableAllButtons();
         currentRound++;
-        setTimeout(startRound, 2000); // move to next round after 2 sec
+        setTimeout(startRound, 2000); 
       }
     }
 
